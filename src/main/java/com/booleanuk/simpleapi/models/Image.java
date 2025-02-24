@@ -35,7 +35,6 @@ public class Image {
 
     private int width;
 
-    @JsonIgnore
     private byte[] pixels;
 
     public Image(int height, int width, byte[] pixels) {

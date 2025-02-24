@@ -46,7 +46,6 @@ public class ImageManager {
             int value = (int) ((handleSignedInts(imageA.getPixels()[i]) + handleSignedInts(imageB.getPixels()[i])) * 0.5);
             rawColors[i] = value;
         }
-
     }
 
     public Image makeImage() {
@@ -54,12 +53,14 @@ public class ImageManager {
         this.processColors();
 
         //This should probably be done on the frontend
-        //BufferedImage avgImage = new BufferedImage(minWidth, minHeight, BufferedImage.TYPE_INT_RGB);
+        // BufferedImage avgImage = new BufferedImage(minWidth, minHeight, BufferedImage.TYPE_INT_RGB);
         //avgImage.setRGB(0, 0, minWidth, minHeight, processedColors, 0, minWidth);
         System.out.println("Image created!");
         return new Image(minHeight, minWidth, processedColors);
     }
 
+   // internal testing method
+   /*
    public void writeImage(BufferedImage image) {
         try {
             ImageIO.write(image, "PNG", new java.io.File("averaged_image.png"));
@@ -69,5 +70,6 @@ public class ImageManager {
         }
 
     }
+   */
 
 }

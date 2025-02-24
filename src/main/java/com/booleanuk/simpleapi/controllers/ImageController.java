@@ -37,4 +37,14 @@ public class ImageController {
         return new ResponseEntity<>(this.imageRepository.save(image), HttpStatus.CREATED);
     }
 
+    //Not sure if it makes sense to have a PUT mapping here as it effectively would be the same as making a new POST request
+
+    @DeleteMapping("{id}")
+    private ResponseEntity<?> deleteImage(@PathVariable(name = "id") int id) {
+        Image image = this.imageRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        this.imageRepository.delete(image);
+        return new ResponseEntity<>("Image deleted.", HttpStatus.OK);
+    }
+
 }
