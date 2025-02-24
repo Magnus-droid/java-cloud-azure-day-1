@@ -24,6 +24,11 @@ For this exercise you should get a full stack web application working ready to d
 
 - Back end API using Java and the Spring Boot Application starter package
 - Database using PostgreSQL hosted on ~~Azure~~ Neon (we can point it at an Azure one later)
+Result of the task:
+
+# Image 1: ![](img.png)
+# Image 2: ![](img_1.png)
+# Resulting image: ![](img_2.png)
 
 ## Extension Activity
 
