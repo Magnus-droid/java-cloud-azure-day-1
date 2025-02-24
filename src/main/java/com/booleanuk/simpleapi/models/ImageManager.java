@@ -2,8 +2,6 @@ package com.booleanuk.simpleapi.models;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.util.Arrays;
-
 import static java.lang.Math.min;
 
 public class ImageManager {
@@ -11,7 +9,7 @@ public class ImageManager {
     private int minHeight;
     private int minWidth;
     private int[] rawColors;
-    private int[] processedColors;
+    private byte[] processedColors;
     private Image imageA;
     private Image imageB;
 
@@ -22,7 +20,7 @@ public class ImageManager {
         this.minHeight = min(imageA.getHeight(), imageB.getHeight());
         this.minWidth = min(imageA.getWidth(), imageB.getWidth());
         this.rawColors = new int[minLength];
-        this.processedColors = new int[rawColors.length / 3];
+        this.processedColors = new byte[rawColors.length / 3];
     }
 
     //This method processes the colors to be in the correct format because .setRGB requires it
@@ -31,7 +29,7 @@ public class ImageManager {
             int blue = rawColors[i * 3] & 0xFF;
             int green = rawColors[i * 3 + 1] & 0xFF;
             int red = rawColors[i * 3 + 2] & 0xFF;
-            processedColors[i] = (red << 16) | (green << 8) | blue;
+            processedColors[i] = (byte) ((red << 16) | (green << 8) | blue);
         }
     }
 
@@ -51,13 +49,15 @@ public class ImageManager {
 
     }
 
-    public BufferedImage makeImage() {
+    public Image makeImage() {
         this.getAverage();
         this.processColors();
 
-        BufferedImage avgImage = new BufferedImage(minWidth, minHeight, BufferedImage.TYPE_INT_RGB);
-        avgImage.setRGB(0, 0, minWidth, minHeight, processedColors, 0, minWidth);
-        return avgImage;
+        //This should probably be done on the frontend
+        //BufferedImage avgImage = new BufferedImage(minWidth, minHeight, BufferedImage.TYPE_INT_RGB);
+        //avgImage.setRGB(0, 0, minWidth, minHeight, processedColors, 0, minWidth);
+        System.out.println("Image created!");
+        return new Image(minHeight, minWidth, processedColors);
     }
 
    public void writeImage(BufferedImage image) {
